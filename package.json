@@ -6,7 +6,7 @@
     "@astryxdesign/theme-gothic": "^0.7.13",
     "@astryxdesign/theme-neutral": "^0.7.13",
     "@stylexjs/stylex": "^0.19.1",
-    "astro": "^5.18.2"
+    "astro": "^7.4.7"
   },
   "devDependencies": {
     "@astryxdesign/cli": "^0.7.13"
