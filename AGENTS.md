@@ -1,35 +1,94 @@
 # AGENTS.md
 
-Project-specific guidance for AI coding agents.
+Instructions for AI coding agents (Claude Code, Cursor, and others) working in this repository. Humans should read README.md first; this file is the agent-facing contract.
 
-<!-- ASTRYX:START -->
-Astryx v0.7.13 · 174 components
-CLI: run every command as `yarn astryx <cmd>` (shown below as `astryx ...`).
+## Project overview
 
-SETUP (once, in app entry e.g. main.tsx) — without these, components render unstyled:
-  import "@astryxdesign/core/reset.css";
-  import "@astryxdesign/core/astryx.css";
+Apex Atelier is a custom design system built on IBM's Carbon Design System (v11), plus two consumers of it:
 
-WORKFLOW — start every page from a template, never from scratch:
-1. `astryx build "<idea>"` — names the template to scaffold from and the parts it lacks.
-2. `astryx template <name> <path>` — scaffold it; keep its frame, gap and padding; replace the content.
-3. `astryx template <Block>` for parts it lacks; `astryx component <Name>` to read props before using one.
-Changing an existing page? Keep it: skip step 2 and add blocks/components inside its sections.
-Before you deliver a build, run `astryx doctor --built <dir>`; don't deliver it if it fails.
+- **`packages/theme`**: the Apex brand theme. It takes Carbon's White and Gray 100 themes and swaps the brand color for copper. It is the only place brand values live.
+- **`apps/web`**: the reference storefront (React 19, Vite, TypeScript, `@carbon/react`). Customers pick a GT Series vehicle and order mods and upgrades.
+- **`packages/mcp-server`**: a Model Context Protocol server that exposes the design system to AI agents through four tools: `docs_search`, `code_example`, `icon_search` and `token_lookup`.
 
-RULES:
-- No <div> — components handle all layout and spacing.
-- Read `astryx docs layout` before changing a template's frame.
-- Dense data = rows (Table, List/Item), not Card-wrapped lists. Badge = counts only.
-- Style with component props first, then tokens (var(--color-*|--spacing-*|--radius-*)). No raw hex/px. No StyleX/Tailwind compiler here — don't use xstyle/utility classes directly. Some templates use StyleX and need a compiler plugin; see `astryx docs styling-overview`.
-- Palettes and custom colors go through the theme, never :root overrides. Run `astryx theme add <slug>` to import; `theme eject <slug>` only forks source. See `astryx docs theme`.
-- SELF-CHECK: re-read the file; replace any raw <div>/<span>, imported .css/@apply, or hardcoded #hex/px with the component or a token.
+The architecture is agentic: agents use the design system through the MCP server's tools, and the same tools are deployed so other agents and clients can use them remotely.
 
-`astryx help` lists every command. Key ones beyond the workflow:
-  search "<query>"   find any component / hook / doc / template
-  discover <words>   integrations you could add
-  docs <topic>       getting-started, principles, tokens, theme … (`astryx docs` lists all)
-  docs cli           commands and API reference
-  docs authoring     build an integration package, and every field it holds
-  upgrade --from <old version> --apply   run after a dependency bump
-<!-- ASTRYX:END -->
+## Repository layout
+
+```
+apps/
+  web/                  Storefront (Vite + React + @carbon/react)
+    src/views/          Showroom, Configurator, Orders
+    src/data/catalog.ts Vehicles, upgrade options, prices, fitment rules
+packages/
+  theme/                Apex Sass theme: $apex-light, $apex-dark, button tokens
+    src/index.scss
+  mcp-server/           MCP server (stdio locally, Streamable HTTP when deployed)
+    src/server.ts       Registers tools
+    src/tools/          docs.ts, code.ts, icons.ts, tokens.ts
+    src/data/           components.json, icons.json
+.github/workflows/      CI (ci.yml) and deploy (deploy.yml)
+Dockerfile              Builds web + MCP server into one image
+AGENTS.md               This file
+```
+
+## Setup and commands
+
+Node 22 or later, with npm workspaces. Run everything from the repo root.
+
+```bash
+npm install                          # install all workspaces
+npm run dev -w apps/web              # storefront at http://localhost:5173
+npm run build                        # typecheck and build every workspace
+npm run lint                         # oxlint
+npm test                             # unit tests (all workspaces)
+npm run dev -w packages/mcp-server   # MCP server over stdio
+npx @modelcontextprotocol/inspector npx tsx packages/mcp-server/src/server.ts
+```
+
+Before you finish any task, `npm run build` and `npm test` must pass. Don't report a task as done if either fails.
+
+## Design system rules (must follow)
+
+These rules match Carbon's own guidelines and the Carbon MCP `code_audit`. If you break one, the PR will be rejected.
+
+1. **Use Carbon components first.** Reach for `@carbon/react` before writing custom UI: Tile, RadioTile, SelectableTile, Tabs, ContentSwitcher, Modal, DataTable, Tag, InlineNotification, UI Shell (Header, SideNav). Only build a custom component if no Carbon component fits, and say why in the PR.
+2. **Never hard-code colors.** Use Carbon tokens: Sass `theme.$link-primary`, or CSS `var(--cds-link-primary)`. Hex values are allowed only in `packages/theme`.
+3. **Change the brand only in `packages/theme`.** It overrides these tokens and nothing else: `interactive`, `border-interactive`, `icon-interactive`, `link-*`, `focus`, `background-brand`, plus the `--cds-button-primary*` and `--cds-button-tertiary*` custom properties. Leave layers, text, borders and support colors as Carbon's.
+4. **No inline styles.** Don't use `style={{…}}`. Put styles in SCSS with a class name, using `@carbon/react/scss/spacing`, `theme` and `type`.
+5. **Use Carbon's layout and type scale.** Lay pages out with `Grid` and `Column` (sm 4, md 8, lg 16; spans 1 to 16, never 0). Use `withRowGap` when a grid wraps onto multiple rows. Hide a column at certain breakpoints with a class, not a span of 0. For text, use Carbon type styles (`type.type-style('heading-04')`), not custom font sizes.
+6. **Give every Button an explicit `kind`.** Use one primary action per view.
+7. **Keep Tags for states that need attention.** Finished or neutral states are plain text.
+
+## Accessibility (must follow)
+
+- **Contrast:** text must meet WCAG 2.1 AA (4.5:1 for text, 3:1 for large text and UI). If you change a brand color, recompute every pairing and update the contrast table in README.md.
+
+  | Pairing | Contrast |
+  | --- | --- |
+  | White on copper `#A3471F` | 6.0:1 |
+  | Copper on White | 6.0:1 |
+  | Light copper `#F2A27A` on Gray 100 | 8.8:1 |
+
+- **Labels:** icon-only controls need an `aria-label`. Illustrations need `role="img"` and a description.
+- **Keyboard:** everything must work by keyboard. Don't remove focus outlines.
+- **Both themes:** check every UI change in the White and Gray 100 themes, and at 390px (phone) and 1440px (desktop) widths.
+
+## Working with the MCP servers
+
+Two Carbon MCP servers can be available to agents. Use the right one:
+
+| Server | Use it for |
+| --- | --- |
+| IBM's hosted Carbon MCP (`https://mcp.carbondesignsystem.com/mcp`, IBMid sign-in) | Official Carbon guidance, component examples and `code_audit` |
+| This repo's `packages/mcp-server` | Apex-specific data: brand tokens, our component catalog and icons |
+
+**When building UI:**
+- Look up the component with `code_search` (IBM) or `code_example` (ours) before writing it.
+- Run IBM's `code_audit` on every changed `.tsx` and `.scss` file before opening a PR. Fix all errors. Explain any warnings you leave.
+
+**When changing the MCP server:**
+- Every tool returns `{ content: [{ type: "text" as const, text }] }` and sets `isError: true` on failures.
+- Validate input with zod schemas in `server.ts`. Don't trust raw arguments.
+- Tools are read-only. Never add a tool that writes files, runs shell commands or makes network calls on the user's behalf.
+- `token_lookup` reads values from `@carbon/themes` and `@carbon/layout`. Don't copy token values into JSON.
+- When adding a component to `src/data/components.json`,
