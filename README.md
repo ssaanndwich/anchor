@@ -16,10 +16,15 @@ A human-readable knowledge graph containing decisions, relationships, architectu
 All 6 domains share the same artifact identities and change history. The registry connects the (A) design artifacts in Figma and (B) code, contracts, and documentation owned by Git.
 
 A. Design: Figma, Tokens, Assets
+
 B. Code: React, Storybook Tests
+
 C. Documentation: Guides, Examples, API
+
 D. Contracts: Schemas, Rules, Validation
+
 E. Provenance: Ownership, History, Reviews
+
 F. Metrics: Adoption, Usage, Outcomes
 
 ## Artifact Registry
@@ -314,7 +319,7 @@ Five contract types:
 1. Identity (JSON Schema)
 2. Design-to-code (Token and reference checks)
 3. Quality's minimum requirements, standards (Tests, axe, lint)
-4. Changes Processes in proposals, approvals, and versioning (GitHub Actions)
+4. Changes Processes in proposals, approvals, and versioning
 5. Relationship integrity for agent-readiness, as in:
    a. Every stable component must have a valid design reference
    b. Every stable component must have an implementation.
@@ -418,12 +423,19 @@ ds metrics ds.component.button
 ### Tool vs. Action
 
 list_artifacts: Discover system artifacts
+
 get_artifact: Retrieve artifact metadata
+
 get_relationships: Explore dependencies
+
 get_tokens: Retrieve token definitions
+
 validate_artifact: Run contracts
+
 get_provenance: Inspect authorship and ownership
+
 get_metrics: Retrieve adoption and outcome data
+
 propose_change: Create a proposed change
 
 ## Repo Structure
