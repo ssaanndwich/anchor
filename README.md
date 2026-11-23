@@ -144,11 +144,17 @@ Visual language and design artifacts such as tokens in Figma as a source of trut
 
 #### Index
 **00 – Getting Started:** Principles, conventions, changelog
+
 **01 – Foundations:** Color, typography, spacing, grid, elevation
+
 **02 – Tokens & Variables:** Primitives, semantic tokens, component tokens
+
 **03 – Components:** Buttons, inputs, alerts, cards, navigation
+
 **04 – Patterns:** Forms, tables, page layouts, workflows
+
 **05 - Assets:** Icons, illustrations, logos
+
 **06 – Deprecated:** Archived components and migration notes
 
 ### Component Scope
