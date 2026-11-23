@@ -1,13 +1,13 @@
 # Design Intelligence Infrastructure
 
-This project blueprints the foundation of a a governed, observable, and agent-ready design system's architecture, NOT to build an entire enterprise design system.
+This project blueprints the foundation of a governed, observable, and agent-ready design system's architecture, NOT to build an entire enterprise design system.
 
 There are 5 main sections:
 1. The Knowledge Base, which documents everything internally
-2. The Design System, made of 6 categories
+2. The Design System, made of 6 categories labelled A-F
 3. The Artifact Registry, a machine-readable central index, connecting the 6 categories
 4. Agent and Human Orchestration, which defines agentic roles, permissions, and human-in-the-loop steps
-5. Core + Domain Extensions, the shared foundations with independently governed extensions, e.g. an extension of the design system as a commerce or data application for specific clients
+5. Core + Domain Extensions, defining the core library vs. the independently governed design system extensions for a specific client's data application, for example
 
 ## Obsidian as the Knowledge and Relationship Base
 A human-readable knowledge graph containing decisions, relationships, architecture, context, and ownership
@@ -22,7 +22,7 @@ D. Contracts: Schemas, Rules, Validation
 E. Provenance: Ownership, History, Reviews
 F. Metrics: Adoption, Usage, Outcomes
 
-## Artifact Registry + Contracts
+## Artifact Registry
 IDs, schemas, relationships, versions, owners, validation
 Implement a simple registry package containing a JSON manifest for every component.
 
@@ -125,11 +125,11 @@ registry.validate("ds.component.button");
 Discover -> Propose -> Validate -> Review -> Publish -> Measure
 More on this later.
 
-### 4 Agent Roles
+### 4 Agentic Roles
 1. Discovery: finds existing components, tokens, patterns, and documentation. Identifies opportunities for reuse.
 2. Design translation: translates approved design definitions into code, stories, and documentation
 3. Validation: checks contracts, token compliance, accessibility, test results, and missing documentation.
-4. Intelligence: analyzes usage, identifies redundant components, and recommends improvements based on adoption and outcome metrics.
+4. Transistor: analyzes usage, identifies redundant components, and recommends improvements based on adoption and outcome metrics.
 
 ## Core + Domain Extensions
 Shared foundations, governed contributions, and product-specific extensions
@@ -500,14 +500,14 @@ design-intelligence/
 ├── package.json
 └── README.md
 ```
+
 ## Use Case
 
-Theoretically, this should work but would require a tyrant or engaged hive to sustainably maintain.
+Theoretically, this should work but would require a tyrant, engaged hive, and/or small group to sustainably maintain.
 
 To summarize, Design Intelligence Infrastructure is a governed, interconnected system that transforms design-system artifacts into machine-readable, versioned, observable resources that humans and AI agents can discover, contribute to, validate, and improve.
 
-Here's a demonstration or example of this working in action:
+A demonstration or example of this working in action would be:
+- A designer changes a token in Figma. Then, an agent discovers the change and proposes a corresponding implementation. After a solution is reviewed and approved, Ladle renders the updated component. With the rendering available for comparison, the Validator(s) validates design-code compliance by way of the contracts and (a) Maintainer(s) reviews the change. Finally, Provenance records the contribution, relationships are updated across documentation such as the knowledge base, and metrics track usage, adoption, and such thanks to the Transistor. 
 
-A designer changes a token in Figma. An agent discovers the change, proposes the corresponding implementation, Ladle renders the updated component, contracts validate compliance, a maintainer reviews the change, provenance records the contribution, Obsidian reflects the updated relationships, and metrics track adoption.
-
-This means we'd have one coherent system with a traceable lifecycle, assuming the team overseeing this can sustain, steer, and comply with such an effort.
+This means we'd have one coherent system with a traceable lifecycle, assuming the team overseeing this can sustain, steer, and comply with such a colossal effort. Successful groupings of and results from machine-human and human-to-human collaboration, e.g. catching false signals, would be crucial.
