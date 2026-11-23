@@ -502,7 +502,7 @@ design-intelligence/
 ```
 ## Use Case
 
-Theoretically, this should all work.
+Theoretically, this should work but would require a tyrant or engaged hive to sustainably maintain.
 
 To summarize, Design Intelligence Infrastructure is a governed, interconnected system that transforms design-system artifacts into machine-readable, versioned, observable resources that humans and AI agents can discover, contribute to, validate, and improve.
 
@@ -510,4 +510,4 @@ Here's a demonstration or example of this working in action:
 
 A designer changes a token in Figma. An agent discovers the change, proposes the corresponding implementation, Ladle renders the updated component, contracts validate compliance, a maintainer reviews the change, provenance records the contribution, Obsidian reflects the updated relationships, and metrics track adoption.
 
-This means we'd have one coherent system with a traceable lifecycle.
+This means we'd have one coherent system with a traceable lifecycle, assuming the team overseeing this can sustain, steer, and comply with such an effort.
