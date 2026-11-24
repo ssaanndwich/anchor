@@ -131,7 +131,7 @@ Discover -> Propose -> Validate -> Review -> Publish -> Measure
 
 More on this later.
 
-### 4 Agentic Roles
+### 4 Agentic Roles, Partnered with Human(s)
 1. Discoverer: finds existing components, tokens, patterns, and documentation. Identifies opportunities for reuse.
 2. Interpretor: translates approved design definitions into code, stories, and documentation
 3. Validator: checks contracts, token compliance, accessibility, test results, and missing documentation.
