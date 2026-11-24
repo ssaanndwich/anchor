@@ -141,7 +141,7 @@ More on this later.
 Shared foundations, governed contributions, and product-specific extensions
 
 
-░░░░▒▒▒▒▓▓▓▓█████
+░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░
 
 ## The 6 Domains
 
