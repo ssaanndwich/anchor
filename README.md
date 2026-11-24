@@ -143,7 +143,7 @@ Shared foundations, governed contributions, and product-specific extensions
 
 ░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░
 
-## The 6 Domains
+# The 6 Domains
 
 ### A. Design
 Visual language and design artifacts such as tokens in Figma as a source of truth
@@ -405,7 +405,7 @@ Examples:
 | Checkout components   |   Checkout conversion              |
 --------------------------------------------------------------
 
-## Agentic Interface for Orchestration
+# Agentic Interface for Orchestration
 
 Make the registry API and CLI the first agent interfaces, then expose them through MCP when appropriate. Suggested bash commands:
 
@@ -514,7 +514,7 @@ design-intelligence/
 └── README.md
 ```
 
-## Use Case
+# Use Case and Real World Applications
 
 Theoretically, this should work but would require a tyrant, engaged hive, and/or small group to sustainably maintain.
 
