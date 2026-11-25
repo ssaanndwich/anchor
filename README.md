@@ -13,7 +13,7 @@ There are 5 main sections:
 A human-readable knowledge graph containing decisions, relationships, architecture, context, and ownership
 
 ## Six Interconnected Domains
-All 6 domains share the same artifact identities and change history. The registry connects the (A) design artifacts in Figma and (B) code, contracts, and documentation owned by Git.
+All 6 domains share the same artifact identities and change history. The registry connects the design artifacts in Figma and code, contracts, and documentation owned by Git.
 
 A. Design: Figma, Tokens, Assets
 
@@ -141,7 +141,7 @@ More on this later.
 Shared foundations, governed contributions, and product-specific extensions
 
 
-░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░
+░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓███████████████▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░
 
 # The 6 Domains
 
